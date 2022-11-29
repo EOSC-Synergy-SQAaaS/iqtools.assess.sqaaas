@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/xaratustrah/iqtools:
+      branch: main
+      repo: https://github.com/xaratustrah/iqtools
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/xaratustrah/iqtools git:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-malachite-camel.sh
+        container: qc.acc_scummy-wisteria-discus
+  QC.Doc:
+    repos:
+      github.com/xaratustrah/iqtools find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-black-flamingo.sh
+        container: qc.doc_tasty-gold-havanese
+      github.com/xaratustrah/iqtools git:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-smalt-bongo.sh
+        container: qc.doc_pokey-chocolate-moth
+      github.com/xaratustrah/iqtools markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-puce-dodo.sh
+        container: qc.doc_snazzy-beige-salamander
+  QC.Lic:
+    repos:
+      github.com/xaratustrah/iqtools licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-indigo-chameleon.sh
+        container: qc.lic_gamy-pumpkin-eagle
+  QC.Sec:
+    repos:
+      github.com/xaratustrah/iqtools bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-purple-labradoodle.sh
+        container: qc.sec_foggy-cinnabar-falcon
+  QC.Sty:
+    repos:
+      github.com/xaratustrah/iqtools flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-ecru-tarantula.sh
+        container: qc.sty_surly-red-badger
+  QC.Ver:
+    repos:
+      github.com/xaratustrah/iqtools get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-amaranth-dachshund.sh
+        container: qc.ver_queasy-blue-woodlouse
+timeout: 1800
